@@ -28,9 +28,9 @@ const Header = () => {
         <Link to={"/"}>Home</Link>
       </li>
 
-      <li>
+      {/* <li>
         <Link to={"/services"}>Services</Link>
-      </li>
+      </li> */}
     </>
   );
   const loginRegisterBtn = (
@@ -38,9 +38,9 @@ const Header = () => {
       {user?.email ? (
         <>
           <Link onClick={handleSignOut}>
-            <button className="btn btn-outline">Logout</button>
+            <button className="btn btn-outline btn-secondary">Logout</button>
           </Link>
-          <div>{user?.email}</div>
+          {/* <div>{user?.email}</div> */}
           <div>
             <img
               className="w-12 rounded-full"
@@ -66,7 +66,7 @@ const Header = () => {
   );
 
   return (
-    <div className="navbar  mb-12 pt-12">
+    <div className="navbar  mb-12 py-4 bg-info shadow-lg  custom-nav">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

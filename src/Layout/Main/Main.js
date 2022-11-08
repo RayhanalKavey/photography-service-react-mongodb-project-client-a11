@@ -11,10 +11,7 @@ const Main = () => {
       </header>
 
       <Outlet></Outlet>
-
-      <footer>
-        <Footer></Footer>
-      </footer>
+      <Footer></Footer>
     </div>
   );
 };

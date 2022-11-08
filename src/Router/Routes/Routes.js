@@ -3,6 +3,7 @@ import Main from "../../Layout/Main/Main";
 import Login from "../../Pages/Authentication/Login/Login";
 import Signup from "../../Pages/Authentication/Signup/Signup";
 import Home from "../../Pages/Home/Home";
+import ServiceDetails from "../../Pages/Services/ServiceDetails";
 import Services from "../../Pages/Services/Services";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
@@ -13,17 +14,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        loader: () => fetch("http://localhost:5005/services"),
         element: <Home></Home>,
       },
       {
         path: "/services",
-        loader: () =>
-          fetch("https://service-assignment-11-server.vercel.app/services"),
-        element: (
-          <PrivateRoute>
-            <Services></Services>
-          </PrivateRoute>
-        ),
+        loader: () => fetch("http://localhost:5005/services"),
+        element: <Services></Services>,
       },
       {
         path: "/login",
@@ -32,6 +29,12 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup></Signup>,
+      },
+      {
+        path: "/serviceDetails/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5005/services/${params.id}`),
+        element: <ServiceDetails></ServiceDetails>,
       },
     ],
   },
