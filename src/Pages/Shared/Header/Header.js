@@ -40,7 +40,15 @@ const Header = () => {
           <Link onClick={handleSignOut}>
             <button className="btn btn-outline">Logout</button>
           </Link>
-
+          <div>{user?.email}</div>
+          <div>
+            <img
+              className="w-12 rounded-full"
+              src={user?.photoURL}
+              alt=""
+              title={user?.displayName}
+            />
+          </div>
           {/* <li className="self-center">{user?.email}</li> */}
         </>
       ) : (
@@ -49,9 +57,9 @@ const Header = () => {
             <button className="btn btn-outline">Login</button>
           </Link>
 
-          <Link to={"/signup"}>
+          {/* <Link to={"/signup"}>
             <button className="btn btn-outline">Sign Up</button>
-          </Link>
+          </Link> */}
         </>
       )}
     </>
@@ -59,7 +67,6 @@ const Header = () => {
 
   return (
     <div className="navbar  mb-12 pt-12">
-      <h1>{user?.email}</h1>
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

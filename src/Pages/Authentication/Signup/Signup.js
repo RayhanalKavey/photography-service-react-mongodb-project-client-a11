@@ -4,7 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 
 const Signup = () => {
-  const { setUser, createUser, googleLogin } = useContext(AuthContext);
+  const { setUser, createUser, googleLogin, updateUserProfile } =
+    useContext(AuthContext);
 
   // Check if the term and conditions accepted or not
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -123,9 +124,24 @@ const Signup = () => {
         e.target.reset();
         //Navigate user to the desired path
         navigate(from, { replace: true });
+
+        handleUpdateUserProfile(name, photoURL);
       })
       .catch((error) => {
         toast.error(`${error.message}`);
+      });
+  };
+
+  //  update user when cheating.// we also update using this in the profile
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {})
+      .catch((error) => {
+        toast.error(error.message);
       });
   };
   return (
