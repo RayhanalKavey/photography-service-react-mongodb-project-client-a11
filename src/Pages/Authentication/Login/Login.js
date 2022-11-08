@@ -1,13 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 
 const Login = () => {
+  const { setUser, logIn, googleLogin } = useContext(AuthContext);
+
+  //------------- redirect user
+  const navigate = useNavigate();
+  //------------- user location where they want to go
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  //LogIn/sign up with google
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        toast.success("Logged in successfully!!");
+
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+
+    //Log In with email and password
+    logIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        navigate(from, { replace: true });
+        toast.success("User logged in successfully.");
+        //  form.reset();
+      })
+      .catch((error) => {
+        toast.error(`${error.message}`);
+      });
   };
 
   return (
@@ -55,7 +93,7 @@ const Login = () => {
                 value="Login"
               />
             </div>
-            <button>Google</button>
+            <button onClick={handleGoogleLogin}>Google</button>
           </form>
           <p className="text-center text-slate-500	">
             New to genius car?{" "}

@@ -1,9 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 
 const Signup = () => {
+  const { setUser, createUser, googleLogin } = useContext(AuthContext);
+
   // Check if the term and conditions accepted or not
   const [acceptTerms, setAcceptTerms] = useState(false);
+
+  //------------- redirect user
+  const navigate = useNavigate();
+  //------------- user location where they want to go
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   // Handle Terms and conditions
   const handleTermsAndConditions = (event) => {
     setAcceptTerms(event.target.checked);
@@ -80,13 +91,42 @@ const Signup = () => {
     }
   };
 
+  //LogIn/sign up with google
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        toast.success("Logged in successfully!!");
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  //submit button
   const handleSignUp = (e) => {
     e.preventDefault();
     const name = userInformation?.name;
     const photoURL = userInformation?.photoURL;
     const email = userInformation?.email;
     const password = userInformation?.password;
-    console.log(name, photoURL, email, password);
+
+    //Sign in with email and password
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        toast.success("User cleated successfully.");
+        e.target.reset();
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(`${error.message}`);
+      });
   };
   return (
     <div className="hero w-full my-20 ">
@@ -177,7 +217,7 @@ const Signup = () => {
                 value="Sign Up"
               />
             </div>
-            <button>Google</button>
+            <button onClick={handleGoogleLogin}>Google</button>
           </form>
           <p className="text-center text-slate-500	">
             Already have an account?{" "}

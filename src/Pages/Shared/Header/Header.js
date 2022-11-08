@@ -4,9 +4,23 @@ import photoBizzLogo from "../../../assets/images/Logo/logo.png";
 import homeBg from "../../../assets/images/background-img/home-background.png";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import "./Header.css";
+import toast from "react-hot-toast";
 
 const Header = () => {
-  // const { user } = useContext(AuthContext);
+  const { user, setUser, logout } = useContext(AuthContext);
+
+  /// Handle log out
+  const handleSignOut = () => {
+    logout()
+      .then((result) => {
+        toast.success("Logged out successfully!");
+        // navigate(from, { replace: true });
+        setUser({});
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   const navItems = (
     <>
@@ -21,14 +35,31 @@ const Header = () => {
   );
   const loginRegisterBtn = (
     <>
-      <Link to={"/login"}>
-        <button className="btn btn-outline">Login</button>
-      </Link>
+      {user?.email ? (
+        <>
+          <Link onClick={handleSignOut}>
+            <button className="btn btn-outline">Logout</button>
+          </Link>
+
+          {/* <li className="self-center">{user?.email}</li> */}
+        </>
+      ) : (
+        <>
+          <Link to={"/login"}>
+            <button className="btn btn-outline">Login</button>
+          </Link>
+
+          <Link to={"/signup"}>
+            <button className="btn btn-outline">Sign Up</button>
+          </Link>
+        </>
+      )}
     </>
   );
 
   return (
     <div className="navbar  mb-12 pt-12">
+      <h1>{user?.email}</h1>
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
