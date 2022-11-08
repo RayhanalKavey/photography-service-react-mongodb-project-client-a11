@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import photoBizzLogo from "../../../assets/images/Logo/logo.png";
 import homeBg from "../../../assets/images/background-img/home-background.png";
+import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import "./Header.css";
 
 const Header = () => {
+  // const { user } = useContext(AuthContext);
+
+  const navItems = (
+    <>
+      <li className="font-semibold">
+        <Link to={"/"}>Home</Link>
+      </li>
+
+      <li>
+        <Link to={"/services"}>Services</Link>
+      </li>
+    </>
+  );
+  const loginRegisterBtn = (
+    <>
+      <Link to={"/login"}>
+        <button className="btn btn-outline">Login</button>
+      </Link>
+    </>
+  );
+
   return (
-    <div className="navbar bg-base-100 mb-12 pt-12 bg-slate-800">
+    <div className="navbar  mb-12 pt-12">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -29,27 +51,19 @@ const Header = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3  p-2 shadow bg-base-100 rounded-box w-52"
           >
-            {/* Menu Items starT */}
-            <Link to={"/"}>home</Link>
-            <Link to={"/services"}>Services</Link>
-            {/* Menu Items enD */}
+            {navItems}
           </ul>
         </div>
-        <Link to={"/"} className="btn btn-ghost normal-case text-xl">
-          <img src={photoBizzLogo} alt="" />
-        </Link>
+        <div>
+          <Link to={"/"} className="btn btn-ghost normal-case text-xl">
+            <img className="w-20" src={photoBizzLogo} alt="" />
+          </Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">
-          {/* Menu Items starT */}
-          <Link to={"/"}>home</Link>
-          <Link to={"/services"}>Services</Link>
-          {/* Menu Items enD */}
-        </ul>
+        <ul className="menu menu-horizontal p-0">{navItems}</ul>
       </div>
-      <div className="navbar-end">
-        <button className="btn btn-outline">Appointment</button>
-      </div>
+      <div className="navbar-end">{loginRegisterBtn}</div>
     </div>
   );
 };

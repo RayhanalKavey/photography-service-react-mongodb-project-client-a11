@@ -6,9 +6,15 @@ import Header from "../../Pages/Shared/Header/Header";
 const Main = () => {
   return (
     <div>
-      <Header></Header>
+      <header className="bg-slate-400">
+        <Header></Header>
+      </header>
+
       <Outlet></Outlet>
-      <Footer></Footer>
+
+      <footer>
+        <Footer></Footer>
+      </footer>
     </div>
   );
 };
