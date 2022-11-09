@@ -20,6 +20,7 @@ const ServiceDetails = () => {
       reviewerName: name,
       email,
       reviewerImg: photoURL,
+      serviceTitle: title,
       serviceId: _id,
       reviewDescription,
     };
