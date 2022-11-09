@@ -40,29 +40,35 @@ const Header = () => {
     <>
       {user?.email ? (
         <>
-          <Link onClick={handleSignOut}>
-            <button className="btn btn-outline btn-secondary">Logout</button>
-          </Link>
+          <li className="">
+            <Link onClick={handleSignOut}>
+              <button className="btn btn-outline btn-secondary">Logout</button>
+            </Link>
+          </li>
           {/* <div>{user?.email}</div> */}
-          <div>
+          <li className="mx-5">
             <img
               className="w-12 rounded-full"
               src={user?.photoURL}
               alt=""
               title={user?.displayName}
             />
-          </div>
+          </li>
           {/* <li className="self-center">{user?.email}</li> */}
         </>
       ) : (
         <>
-          <Link to={"/login"}>
-            <button className="btn btn-outline">Login</button>
-          </Link>
+          <li>
+            <Link to={"/login"}>
+              <button className="btn btn-outline">Login</button>
+            </Link>
+          </li>
 
-          {/* <Link to={"/signup"}>
-            <button className="btn btn-outline">Sign Up</button>
-          </Link> */}
+          <li className="mx-5">
+            <Link to={"/signup"}>
+              <button className="btn btn-outline">Sign Up</button>
+            </Link>
+          </li>
         </>
       )}
     </>
@@ -104,7 +110,7 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0 font-semibold">{navItems}</ul>
       </div>
-      <div className="navbar-end">{loginRegisterBtn}</div>
+      <ul className="navbar-end">{loginRegisterBtn}</ul>
     </div>
   );
 };
