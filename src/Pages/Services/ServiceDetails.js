@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
@@ -13,7 +14,7 @@ const ServiceDetails = () => {
     const name = user?.displayName;
     const email = user?.email || "Unregistered";
     const photoURL = user?.photoURL;
-    const reviewDescription = form.message.value;
+    const reviewDescription = form?.reviewText?.value;
 
     const review = {
       reviewerName: name,
@@ -22,9 +23,26 @@ const ServiceDetails = () => {
       serviceId: _id,
       reviewDescription,
     };
-    console.log(review);
-  };
 
+    //Sending data to the server with post (part of create method)
+    fetch("http://localhost:5005/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success("Review added successfully");
+          form.reset();
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
   return (
     <div>
       {/* Service details section */}
@@ -50,7 +68,6 @@ const ServiceDetails = () => {
       </div>
 
       {/* reviews section */}
-      {/* <div className="grid grid-cols-1 lg:grid-cols-3 mb-32"></div> */}
 
       <div className=" mb-32 mx-8">
         <h1 className=" text-5xl my-8 text-center">Reviews</h1>
@@ -85,9 +102,10 @@ const ServiceDetails = () => {
               readOnly
             />
             <textarea
-              name="message"
+              name="reviewText"
               className="textarea textarea-bordered h-56 w-full my-8 "
               placeholder="Your reviews"
+              required
             ></textarea>
             <input className="btn btn-secondary" type="submit" value="Submit" />
           </form>
