@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const ServiceDetails = () => {
@@ -64,6 +64,11 @@ const ServiceDetails = () => {
             <span className="font-bold ">Price:</span> {price}
           </div>
           <p className="text-success">{description}</p>
+          <Link to={"/services"}>
+            <button className="btn btn-outline btn-info">
+              Back to All Services
+            </button>
+          </Link>
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import photoBizzLogo from "../../../assets/images/Logo/logo.png";
-import homeBg from "../../../assets/images/background-img/home-background.png";
+// import homeBg from "../../../assets/images/background-img/home-background.png";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import "./Header.css";
 import toast from "react-hot-toast";
@@ -25,6 +25,9 @@ const Header = () => {
     <>
       <li>
         <Link to={"/"}>Home</Link>
+      </li>
+      <li>
+        <Link to={"/myreviews"}>My Reviews</Link>
       </li>
       <li>
         <Link to={"/blog"}>Blog</Link>
