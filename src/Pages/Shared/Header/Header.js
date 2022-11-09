@@ -14,7 +14,6 @@ const Header = () => {
     logout()
       .then((result) => {
         toast.success("Logged out successfully!");
-        // navigate(from, { replace: true });
         setUser({});
       })
       .catch((error) => {
@@ -24,13 +23,12 @@ const Header = () => {
 
   const navItems = (
     <>
-      <li className="font-semibold">
+      <li>
         <Link to={"/"}>Home</Link>
       </li>
-
-      {/* <li>
-        <Link to={"/services"}>Services</Link>
-      </li> */}
+      <li>
+        <Link to={"/blog"}>Blog</Link>
+      </li>
     </>
   );
   const loginRegisterBtn = (
@@ -99,7 +97,7 @@ const Header = () => {
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">{navItems}</ul>
+        <ul className="menu menu-horizontal p-0 font-semibold">{navItems}</ul>
       </div>
       <div className="navbar-end">{loginRegisterBtn}</div>
     </div>
