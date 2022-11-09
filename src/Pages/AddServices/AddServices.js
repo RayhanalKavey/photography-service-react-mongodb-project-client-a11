@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 const AddServices = () => {
   const handleAddService = (event) => {
@@ -8,17 +9,32 @@ const AddServices = () => {
     const price = form?.price.value;
     const img = form?.photoURL.value;
     const description = form?.serviceDescription?.value;
-    console.log(title);
-    console.log(price);
-    console.log(img);
-    console.log(description);
+
     const service = { title, price, img, description };
-    console.log(service);
+
+    //Sending review data to the server with post (part of create method)
+    fetch("http://localhost:5005/services", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(service),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success(data.message);
+          // form.reset();
+        }
+      })
+      .catch((err) => {
+        toast.error(err.error);
+      });
   };
 
   return (
     <form className="mx-10 my-20" onSubmit={handleAddService} action="">
-      <h3 className="font-bold my-5 text-lg ml-3">Add Review</h3>
+      <h3 className="font-bold my-5 text-lg ml-3">Add Service</h3>
       <div className="flex flex-col lg:flex-row gap-8 mb-8">
         {/* title */}
         <input
