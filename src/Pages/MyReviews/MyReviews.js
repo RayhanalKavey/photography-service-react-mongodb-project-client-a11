@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import MyReview from "./MyReview";
 
@@ -6,11 +8,33 @@ const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
 
+  // query data from the data base using email of the logged in user
   useEffect(() => {
     fetch(`http://localhost:5005/reviews?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setMyReviews(data.data));
   }, [user?.email]);
+
+  // send delete request to the data base and update UI with the response
+  const handleDelete = (id) => {
+    const proceed = window.confirm(
+      "Are you sure, you want to delete your valuable review?"
+    );
+    if (proceed) {
+      fetch(`http://localhost:5005/reviews/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            // setMyReviews(data.data);
+            toast.success(data.message);
+            const remaining = myReviews.filter((review) => review._id !== id);
+            setMyReviews(remaining);
+          }
+        });
+    }
+  };
 
   return (
     // overflow-x-auto
@@ -42,9 +66,28 @@ const MyReviews = () => {
       <tbody>
         {/* <!-- row  --> */}
 
-        {myReviews?.map((myReview) => (
-          <MyReview key={myReview._id} myReview={myReview}></MyReview>
-        ))}
+        {myReviews.length ? (
+          myReviews?.map((myReview) => (
+            <MyReview
+              key={myReview._id}
+              myReview={myReview}
+              handleDelete={handleDelete}
+            ></MyReview>
+          ))
+        ) : (
+          <tr className="text-end">
+            <td>
+              You have not made a review yet. Visit our{" "}
+              <Link
+                className="font-bold italic underline underline-offset-2	"
+                to={"/services"}
+              >
+                services
+              </Link>
+              .{" "}
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

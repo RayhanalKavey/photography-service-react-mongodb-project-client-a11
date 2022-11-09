@@ -38,12 +38,12 @@ const ServiceDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          toast.success("Review added successfully");
+          toast.success(data.message);
           form.reset();
         }
       })
       .catch((err) => {
-        toast.error(err.message);
+        toast.error(err.error);
       });
   };
 
@@ -148,11 +148,11 @@ const ServiceDetails = () => {
           </form>
         ) : (
           <div className="text-center mt-10">
-            <Link to={"/login"}>
-              <button className="btn btn-secondary text-center">
-                {" "}
-                Please login to add reviews.
-              </button>
+            <Link
+              className="text-xl font-bold italic underline underline-offset-2"
+              to={"/login"}
+            >
+              Please login to add reviews.
             </Link>
           </div>
         )}
