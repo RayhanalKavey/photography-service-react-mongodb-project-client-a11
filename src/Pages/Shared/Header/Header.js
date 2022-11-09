@@ -27,9 +27,14 @@ const Header = () => {
         <Link to={"/"}>Home</Link>
       </li>
       {user?.uid && (
-        <li>
-          <Link to={"/myreviews"}>My Reviews</Link>
-        </li>
+        <>
+          <li>
+            <Link to={"/myreviews"}>My Reviews</Link>
+          </li>
+          <li>
+            <Link to={"/addServices"}>Add Services</Link>
+          </li>
+        </>
       )}
       <li>
         <Link to={"/blog"}>Blog</Link>
@@ -103,7 +108,7 @@ const Header = () => {
         </div>
         <div>
           <Link to={"/"} className="btn btn-ghost normal-case text-xl">
-            <img className="w-20" src={photoBizzLogo} alt="" />
+            <img className="w-14" src={photoBizzLogo} alt="" />
           </Link>
         </div>
       </div>

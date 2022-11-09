@@ -10,7 +10,7 @@ const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   const [categoryReview, setCategoryReview] = useState([]);
 
-  const handlePlaceOrder = (event) => {
+  const handleAddReview = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = user?.displayName;
@@ -27,7 +27,7 @@ const ServiceDetails = () => {
       reviewDescription,
     };
 
-    //Sending data to the server with post (part of create method)
+    //Sending review data to the server with post (part of create method)
     fetch("http://localhost:5005/reviews", {
       method: "POST",
       headers: {
@@ -110,7 +110,7 @@ const ServiceDetails = () => {
         {/* Old reviews enD*/}
 
         {user?.uid ? (
-          <form onSubmit={handlePlaceOrder} action="">
+          <form onSubmit={handleAddReview} action="">
             <h3 className="font-bold my-5 text-lg ml-3">Add Review</h3>
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
               <input
@@ -133,7 +133,7 @@ const ServiceDetails = () => {
             <input
               name="photoURL"
               type="text"
-              placeholder="Your phone"
+              placeholder="Image link"
               defaultValue={user?.photoURL}
               className="input input-bordered w-full "
               readOnly
