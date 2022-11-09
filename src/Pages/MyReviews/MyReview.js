@@ -12,11 +12,6 @@ const MyReview = ({ myReview }) => {
   } = myReview;
   return (
     <tr>
-      {/* <th>
-        <label>
-          <input type="checkbox" className="checkbox" />
-        </label>
-      </th> */}
       <td>{reviewDescription}</td>
       <td>{serviceTitle}</td>
 

@@ -5,6 +5,7 @@ import Signup from "../../Pages/Authentication/Signup/Signup";
 import Blog from "../../Pages/Blog/Blog";
 import Home from "../../Pages/Home/Home";
 import MyReviews from "../../Pages/MyReviews/MyReviews";
+import Reviews from "../../Pages/Reviews/Reviews";
 import ServiceDetails from "../../Pages/Services/ServiceDetails";
 import Services from "../../Pages/Services/Services";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: () => fetch("http://localhost:5005/services"),
+        loader: () => fetch("http://localhost:5005/servicesHome"),
         element: <Home></Home>,
       },
       {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             <MyReviews></MyReviews>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/reviewsByCategory",
+        element: <Reviews></Reviews>,
       },
     ],
   },

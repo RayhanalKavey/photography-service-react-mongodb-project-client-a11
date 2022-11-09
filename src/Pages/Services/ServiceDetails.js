@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import Reviews from "../Reviews/Reviews";
 
 const ServiceDetails = () => {
   const { data } = useLoaderData();
   const { title, price, img, description, rating, _id } = data;
   const { user } = useContext(AuthContext);
+  const [categoryReview, setCategoryReview] = useState([]);
 
   const handlePlaceOrder = (event) => {
     event.preventDefault();
@@ -44,6 +46,14 @@ const ServiceDetails = () => {
         toast.error(err.message);
       });
   };
+
+  ///get data for individual category by it's id
+  useEffect(() => {
+    fetch(`http://localhost:5005/reviewsByCategory?serviceId=${_id}`)
+      .then((res) => res.json())
+      .then((data) => setCategoryReview(data.data));
+  }, [_id]);
+
   return (
     <div>
       {/* Service details section */}
@@ -77,10 +87,31 @@ const ServiceDetails = () => {
 
       <div className=" mb-32 mx-8">
         <h1 className=" text-5xl my-8 text-center">Reviews</h1>
+        <h3 className="font-bold mb-5 text-lg ml-3">All Reviews</h3>
 
-        {user?.uid && (
+        {/* Old reviews starT */}
+        <table className="table w-full  mx-auto">
+          {/* <!-- head --> */}
+          <thead className=" justify-items-center">
+            <tr>
+              <th>Reviewer</th>
+              <th>Photography Category</th>
+              <th>Review</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* <!-- row  --> */}
+
+            {categoryReview.map((reviewById) => (
+              <Reviews key={reviewById?._id} reviewById={reviewById}></Reviews>
+            ))}
+          </tbody>
+        </table>
+        {/* Old reviews enD*/}
+
+        {user?.uid ? (
           <form onSubmit={handlePlaceOrder} action="">
-            <h3 className="font-bold mb-5 text-lg ml-3">Add review</h3>
+            <h3 className="font-bold my-5 text-lg ml-3">Add Review</h3>
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
               <input
                 name="name"
@@ -115,6 +146,15 @@ const ServiceDetails = () => {
             ></textarea>
             <input className="btn btn-secondary" type="submit" value="Submit" />
           </form>
+        ) : (
+          <div className="text-center mt-10">
+            <Link to={"/login"}>
+              <button className="btn btn-secondary text-center">
+                {" "}
+                Please login to add reviews.
+              </button>
+            </Link>
+          </div>
         )}
       </div>
     </div>
