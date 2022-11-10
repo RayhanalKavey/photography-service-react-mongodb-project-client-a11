@@ -1,19 +1,24 @@
 import React from "react";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+
 import { Link } from "react-router-dom";
 
 const Service = ({ service }) => {
   const { title, price, img, description, rating, _id } = service;
 
   return (
+    // <PhotoProvider>
     <div className="card card-compact w-full h-auto bg-info shadow-2xl ">
       {/* <img src={imageURL} style={{ objectFit: "cover" }} alt="" /> */}
       <figure>
+        {/* <PhotoView key={_id} src={img}> */}
         <img
           className="w-full h-80"
           src={img}
           style={{ objectFit: "cover" }}
           alt="photography"
         />
+        {/* </PhotoView> */}
       </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
@@ -30,6 +35,7 @@ const Service = ({ service }) => {
         </div>
       </div>
     </div>
+    // </PhotoProvider>
   );
 };
 
