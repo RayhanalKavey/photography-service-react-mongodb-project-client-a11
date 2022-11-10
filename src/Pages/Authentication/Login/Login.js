@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../../hooks/useTitle";
 
 const Login = () => {
   const { setUser, logIn, googleLogin } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const Login = () => {
   //------------- user location where they want to go
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
+  useTitle("Login");
   //LogIn/sign up with google
   const handleGoogleLogin = () => {
     googleLogin()

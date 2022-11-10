@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 
 const UpdateReview = () => {
   const { data } = useLoaderData();
@@ -10,7 +11,7 @@ const UpdateReview = () => {
   const { user } = useContext(AuthContext);
 
   const [updateReview, setUpdateReview] = useState(data);
-
+  useTitle("Update review");
   const handleUpdateReview = (event) => {
     event.preventDefault();
     // console.log(updateReview);

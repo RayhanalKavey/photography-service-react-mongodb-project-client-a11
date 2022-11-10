@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const MyReview = ({ myReview, handleDelete }) => {
   const {
@@ -11,6 +12,7 @@ const MyReview = ({ myReview, handleDelete }) => {
     serviceId,
     _id,
   } = myReview;
+  useTitle("My Review");
 
   return (
     <tr>

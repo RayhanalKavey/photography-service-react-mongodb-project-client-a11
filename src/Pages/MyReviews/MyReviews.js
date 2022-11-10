@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 import MyReview from "./MyReview";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
-
+  useTitle("My Review");
   // query data from the data base using email of the logged in user
   useEffect(() => {
     fetch(
@@ -68,7 +69,7 @@ const MyReviews = () => {
       <tbody>
         {/* <!-- row  --> */}
 
-        {myReviews.length ? (
+        {myReviews?.length ? (
           myReviews?.map((myReview) => (
             <MyReview
               key={myReview._id}

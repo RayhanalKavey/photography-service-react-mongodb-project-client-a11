@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../../hooks/useTitle";
 
 const Signup = () => {
   const { setUser, createUser, googleLogin, updateUserProfile } =
@@ -9,7 +10,7 @@ const Signup = () => {
 
   // Check if the term and conditions accepted or not
   const [acceptTerms, setAcceptTerms] = useState(false);
-
+  useTitle("SignUp");
   //------------- redirect user
   const navigate = useNavigate();
   //------------- user location where they want to go

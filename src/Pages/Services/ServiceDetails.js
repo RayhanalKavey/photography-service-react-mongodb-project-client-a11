@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 import Reviews from "../Reviews/Reviews";
 
 const ServiceDetails = () => {
@@ -9,7 +10,7 @@ const ServiceDetails = () => {
   const { title, price, img, description, rating, _id } = data;
   const { user } = useContext(AuthContext);
   const [categoryReview, setCategoryReview] = useState([]);
-
+  useTitle("Service Details");
   const handleAddReview = (event) => {
     event.preventDefault();
     const form = event.target;
