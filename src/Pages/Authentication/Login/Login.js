@@ -44,7 +44,7 @@ const Login = () => {
           email: user.email,
         };
         console.log(currentUser);
-        fetch("http://localhost:5005/jwt", {
+        fetch("https://service-assignment-11-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",

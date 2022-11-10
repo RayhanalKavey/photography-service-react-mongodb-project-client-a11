@@ -10,11 +10,14 @@ const MyReviews = () => {
 
   // query data from the data base using email of the logged in user
   useEffect(() => {
-    fetch(`http://localhost:5005/reviews?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("photo-bizz-token")}`,
-      },
-    })
+    fetch(
+      `https://service-assignment-11-server.vercel.app/reviews?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("photo-bizz-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => setMyReviews(data.data));
   }, [user?.email]);
@@ -25,7 +28,7 @@ const MyReviews = () => {
       "Are you sure, you want to delete your valuable review?"
     );
     if (proceed) {
-      fetch(`http://localhost:5005/reviews/${id}`, {
+      fetch(`https://service-assignment-11-server.vercel.app/reviews/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

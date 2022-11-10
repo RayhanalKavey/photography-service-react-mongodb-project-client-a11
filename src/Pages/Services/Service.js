@@ -10,16 +10,16 @@ const Service = ({ service }) => {
     <div className="card card-compact w-full h-auto bg-info shadow-2xl ">
       {/* <img src={imageURL} style={{ objectFit: "cover" }} alt="" /> */}
       <figure className="foo">
-        {/* <PhotoProvider>
-          <PhotoView> */}
-        <img
-          className="w-full h-80"
-          src={img}
-          style={{ objectFit: "cover" }}
-          alt="photography"
-        />
-        {/* </PhotoView>
-        </PhotoProvider> */}
+        <PhotoProvider>
+          <PhotoView src={img}>
+            <img
+              className="w-full h-80"
+              src={img}
+              style={{ objectFit: "cover" }}
+              alt="photography"
+            />
+          </PhotoView>
+        </PhotoProvider>
       </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
