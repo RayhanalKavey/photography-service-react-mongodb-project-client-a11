@@ -42,11 +42,6 @@ const MyReviews = () => {
       {/* <!-- head --> */}
       <thead className=" justify-items-center">
         <tr>
-          {/* <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th> */}
           <th>
             <div className="flex items-center">
               <div>
