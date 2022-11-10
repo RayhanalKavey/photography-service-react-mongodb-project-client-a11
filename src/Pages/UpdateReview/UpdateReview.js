@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
@@ -12,7 +13,22 @@ const UpdateReview = () => {
 
   const handleUpdateReview = (event) => {
     event.preventDefault();
-    console.log(updateReview);
+    // console.log(updateReview);
+    ///send updated data to the server
+    fetch(`http://localhost:5005/reviews/${updateReview?._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateReview),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success(data.message);
+          event.target.reset();
+        }
+      });
   };
   const handleUpdateChange = (event) => {
     const field = event.target.name;
@@ -20,9 +36,8 @@ const UpdateReview = () => {
     const newReview = { ...updateReview };
     newReview[field] = value;
     setUpdateReview(newReview);
-    console.log(newReview);
   };
-  // console.log(updateReview);
+
   return (
     <form className="mx-10 my-20" onSubmit={handleUpdateReview} action="">
       <h3 className="font-bold my-5 text-lg ml-3">Update your review</h3>
@@ -65,9 +80,9 @@ const UpdateReview = () => {
       ></textarea>
       <button className="btn btn-secondary mr-4">Cancel</button>
       <input
-        className="btn btn-outline btn-error "
+        className="btn btn-outline btn-secondary "
         type="submit"
-        value="Delete"
+        value="Update"
       />
     </form>
   );
