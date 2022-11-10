@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const UpdateReview = () => {
@@ -26,7 +26,6 @@ const UpdateReview = () => {
       .then((data) => {
         if (data.success) {
           toast.success(data.message);
-          event.target.reset();
         }
       });
   };
@@ -78,7 +77,10 @@ const UpdateReview = () => {
         defaultValue={reviewDescription}
         required
       ></textarea>
-      <button className="btn btn-secondary mr-4">Cancel</button>
+      <Link to={"/myReviews"}>
+        {" "}
+        <button className="btn btn-secondary mr-4">Close</button>
+      </Link>
       <input
         className="btn btn-outline btn-secondary "
         type="submit"

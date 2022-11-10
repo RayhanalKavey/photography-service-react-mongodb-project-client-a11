@@ -10,7 +10,11 @@ const MyReviews = () => {
 
   // query data from the data base using email of the logged in user
   useEffect(() => {
-    fetch(`http://localhost:5005/reviews?email=${user?.email}`)
+    fetch(`http://localhost:5005/reviews?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("photo-bizz-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setMyReviews(data.data));
   }, [user?.email]);

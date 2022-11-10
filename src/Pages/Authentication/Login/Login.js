@@ -38,9 +38,29 @@ const Login = () => {
     logIn(email, password)
       .then((result) => {
         const user = result.user;
-        setUser(user);
-        navigate(from, { replace: true });
-        toast.success("User logged in successfully.");
+
+        //JWT starT
+        const currentUser = {
+          email: user.email,
+        };
+        console.log(currentUser);
+        fetch("http://localhost:5005/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("photo-bizz-token", data.token);
+            setUser(user);
+            navigate(from, { replace: true });
+            toast.success("User logged in successfully.");
+          });
+        //JWT enD
+
         //  form.reset();
       })
       .catch((error) => {
