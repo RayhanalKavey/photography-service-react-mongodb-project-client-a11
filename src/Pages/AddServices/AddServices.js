@@ -24,7 +24,7 @@ const AddServices = () => {
       .then((data) => {
         if (data.success) {
           toast.success(data.message);
-          // form.reset();
+          form.reset();
         }
       })
       .catch((err) => {

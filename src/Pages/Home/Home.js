@@ -1,13 +1,23 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import Approach from "../../Components/Approach/Approach";
+import Gallery from "../../Components/Gallery/Gallery";
+import Hero from "../Hero/Hero";
 import Service from "../Services/Service";
+
 import "./Home.css";
 
 const Home = () => {
   const { data } = useLoaderData();
   return (
     <div className="custom-home 	">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-12 mx-10 my-16	">
+      {/* hero section */}
+      <div className="mb-20">
+        <Hero></Hero>
+      </div>
+      {/* services section */}
+      <h1 className=" text-5xl mb-12 text-center">Our Services</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-12 mx-10 mb-12	">
         {data.map((servicesHome) => (
           <Service key={servicesHome._id} service={servicesHome}>
             {" "}
@@ -19,6 +29,14 @@ const Home = () => {
           {" "}
           <button className="btn btn-secondary">View all Services</button>{" "}
         </Link>
+      </div>
+      {/* Our approach section */}
+      <div>
+        <Approach></Approach>
+      </div>
+      {/* gallery section */}
+      <div className="mb-20">
+        <Gallery></Gallery>
       </div>
     </div>
   );
