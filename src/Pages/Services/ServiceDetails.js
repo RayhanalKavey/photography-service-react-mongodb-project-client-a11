@@ -61,9 +61,9 @@ const ServiceDetails = () => {
     <div>
       {/* Service details section */}
 
-      <div className="card w-full h-auto  image-full mb-16">
+      <div className="card  h-auto  image-full mb-16 rounded-full m-8">
         <figure>
-          <img className="w-full" src={img} alt="Shoes" />
+          <img className="w-full " src={img} alt="Shoes" />
         </figure>
 
         <div className="card-body ">
