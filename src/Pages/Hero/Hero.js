@@ -18,7 +18,7 @@ const Hero = () => {
             One of the best photography studios you have ever seen. Let's
             capture moments with Photo Bizz.
           </p>
-          <Link to={"/signup"}>
+          <Link to={"/services"}>
             {" "}
             <button className="btn btn-info btn-outline">Get Started</button>
           </Link>

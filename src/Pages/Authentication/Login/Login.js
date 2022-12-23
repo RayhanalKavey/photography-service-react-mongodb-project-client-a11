@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
@@ -6,19 +6,19 @@ import useTitle from "../../../hooks/useTitle";
 
 const Login = () => {
   const { setUser, logIn, googleLogin } = useContext(AuthContext);
-
+  useTitle("Login");
   //------------- redirect user
   const navigate = useNavigate();
   //------------- user location where they want to go
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  useTitle("Login");
   //LogIn/sign up with google
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
         const user = result.user;
         setUser(user);
+        //  localStorage.setItem("photo-bizz-token", data.token);
         toast.success("Logged in successfully!!");
 
         //Navigate user to the desired path
@@ -45,7 +45,7 @@ const Login = () => {
           email: user.email,
         };
         console.log(currentUser);
-        fetch("https://service-assignment-11-server.vercel.app/jwt", {
+        fetch(`${process.env.REACT_APP_Server_url}/jwt`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -54,7 +54,7 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             localStorage.setItem("photo-bizz-token", data.token);
             setUser(user);
             navigate(from, { replace: true });

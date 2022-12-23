@@ -16,16 +16,13 @@ const UpdateReview = () => {
     event.preventDefault();
     // console.log(updateReview);
     ///send updated data to the server
-    fetch(
-      `https://service-assignment-11-server.vercel.app/reviews/${updateReview?._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updateReview),
-      }
-    )
+    fetch(`${process.env.REACT_APP_Server_url}/reviews/${updateReview?._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateReview),
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

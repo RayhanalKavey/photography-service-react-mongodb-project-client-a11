@@ -1,6 +1,7 @@
 import React from "react";
 
 const Reviews = ({ reviewById }) => {
+  console.log(reviewById);
   const {
     email,
     serviceTitle,

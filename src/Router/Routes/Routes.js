@@ -19,14 +19,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: () =>
-          fetch("https://service-assignment-11-server.vercel.app/servicesHome"),
+        loader: () => fetch(`${process.env.REACT_APP_Server_url}/servicesHome`),
         element: <Home></Home>,
       },
       {
         path: "/services",
-        loader: () =>
-          fetch("https://service-assignment-11-server.vercel.app/services"),
+        loader: () => fetch(`${process.env.REACT_APP_Server_url}/services`),
         element: <Services></Services>,
       },
       {
@@ -40,9 +38,7 @@ const router = createBrowserRouter([
       {
         path: "/serviceDetails/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://service-assignment-11-server.vercel.app/services/${params.id}`
-          ),
+          fetch(`${process.env.REACT_APP_Server_url}/services/${params.id}`),
         element: <ServiceDetails></ServiceDetails>,
       },
       {
@@ -73,9 +69,7 @@ const router = createBrowserRouter([
         path: "/updateReview/:id",
         element: <UpdateReview></UpdateReview>,
         loader: ({ params }) =>
-          fetch(
-            `https://service-assignment-11-server.vercel.app/reviews/${params.id}`
-          ),
+          fetch(`${process.env.REACT_APP_Server_url}/reviews/${params.id}`),
       },
     ],
   },

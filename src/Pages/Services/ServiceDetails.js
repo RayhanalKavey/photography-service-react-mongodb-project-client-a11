@@ -29,7 +29,7 @@ const ServiceDetails = () => {
     };
 
     //Sending review data to the server with post (part of create method)
-    fetch("https://service-assignment-11-server.vercel.app/reviews", {
+    fetch(`${process.env.REACT_APP_Server_url}/reviews`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -51,7 +51,7 @@ const ServiceDetails = () => {
   ///get data for individual category by it's id
   useEffect(() => {
     fetch(
-      `https://service-assignment-11-server.vercel.app/reviewsByCategory?serviceId=${_id}`
+      `${process.env.REACT_APP_Server_url}/reviewsByCategory?serviceId=${_id}`
     )
       .then((res) => res.json())
       .then((data) => setCategoryReview(data.data));
