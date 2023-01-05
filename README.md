@@ -6,21 +6,16 @@
 
 Need a photographer? Someone with experience to collaborate with this is the best website for you.
 
-- Some of our services are being added to the home page. You can see all the services by clicking the view all services button.
-- All customer's valuable reviews for individual services are on the service details page.
-- If anyone logged into the website can leave a review for every service.
-- User can see his/her own review on my review page and can edit or delete reviews.
-- Some important concepts about the technology used on this website are in the blog section.
-- Firebase authentication system is applied in this application. Like, google login, email password login, GitHub login, etc.
+- Only three services appear on the home page. By clicking the ‘see all’ button user can see all the services
+- Then clicking the ‘service details’ button user can see the details of the product and comments of every user
+- Logged in user can leave a review for every service, and can see his/her own review on ‘my review’ page and can edit or delete reviews. Fully responsive to mobile, tablet, and laptop. Data stored and integrated from MongoDB
 
 ### Technology used in the Project
 
-- React
-- React Router DOM
-- React Hot Toast
-- Tailwind CSS , daisyUI, flow bite
-- Firebase
-- MongoDb
+- React.js, React Router DOM, React Hot Toast
+- Tailwind CSS , daisyUI
+- Firebase Authentication
+- Node.js, Express.js, MongoDb, etc.
 
 ---
 
